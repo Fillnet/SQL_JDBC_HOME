@@ -1,8 +1,9 @@
 import java.sql.*;
 
+
 public class Application {
 
-    public static void main(String[] args) {
+    public static void main(String[] args) throws SQLException {
 
 
         final String user = "postgres";
@@ -12,7 +13,7 @@ public class Application {
         try (Connection connection = DriverManager.getConnection(url, user, password)) {
             // id работника, данные о котором мы хотим получить
             int employeeId = 1;
-            String sql = "SELECT first_name, last_name, gender, city_id FROM employee WHERE id = ?";
+            String sql = "SELECT first_name, last_name, gender, city FROM employee WHERE id = ?";
             PreparedStatement statement = connection.prepareStatement(sql);
             statement.setInt(1, employeeId);
             ResultSet resultSet = statement.executeQuery();
@@ -32,5 +33,8 @@ public class Application {
             System.err.println("Error executing query: " + e.getMessage());
 
         }
+
     }
+
+
 }
