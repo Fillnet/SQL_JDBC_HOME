@@ -6,7 +6,7 @@ import java.util.List;
 
 public class Application {
 
-    public static void main(String[] args) throws SQLException {
+    public static void main(String[] args) {
         // Создаем объект DataSource для PostgreSQL
         PGSimpleDataSource dataSource = new PGSimpleDataSource();
         dataSource.setServerName("localhost");
@@ -19,10 +19,12 @@ public class Application {
         EmployeeDAO employeeDAO = new EmployeeDAOImpl(dataSource);
 
         // создание нового сотрудника и добавление его в базу данных
-        Employee newEmployee = new Employee(7, "John", "Doe", "male", 30,"New York");
+        Employee newEmployee = new Employee(7, "John", "Doe", "male", 30, "New York");
         employeeDAO.addEmployee(newEmployee);
+        // обновление данных сотрудника и добавление их в базу
         Employee employee = new Employee(1, "John", "Doe", "Male", 35, "New York");
         employeeDAO.updateEmployee(employee);
+        // вывод списка всех сотрудников
         List<Employee> employees = employeeDAO.getAllEmployees();
         for (Employee emp : employees) {
             System.out.println(emp);
@@ -55,8 +57,5 @@ public class Application {
             System.err.println("Error executing query: " + e.getMessage());
 
         }
-
     }
-
-
 }
