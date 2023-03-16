@@ -1,61 +1,49 @@
-import org.postgresql.ds.PGSimpleDataSource;
-
-import java.sql.*;
+import org.springframework.context.annotation.AnnotationConfigApplicationContext;
 import java.util.List;
 
-
+import org.springframework.context.annotation.ComponentScan;
+@ComponentScan
 public class Application {
-
     public static void main(String[] args) {
-        // Создаем объект DataSource для PostgreSQL
-        PGSimpleDataSource dataSource = new PGSimpleDataSource();
-        dataSource.setServerName("localhost");
-        dataSource.setPortNumber(5432);
-        dataSource.setDatabaseName("skypro");
-        dataSource.setUser("postgres");
-        dataSource.setPassword("6565");
+        AnnotationConfigApplicationContext context = new AnnotationConfigApplicationContext();
+        context.register(HibernateConfig.class);
+        context.refresh();
 
-        // создание объекта EmployeeDAO для работы с таблицей сотрудников
-        EmployeeDAO employeeDAO = new EmployeeDAOImpl(dataSource);
+        EmployeeDAO employeeDAO = context.getBean(EmployeeDAO.class);
 
-        // создание нового сотрудника и добавление его в базу данных
-        Employee newEmployee = new Employee(7, "John", "Doe", "male", 30, "New York");
-        employeeDAO.addEmployee(newEmployee);
-        // обновление данных сотрудника и добавление их в базу
-        Employee employee = new Employee(1, "John", "Doe", "Male", 35, "New York");
-        employeeDAO.updateEmployee(employee);
-        // вывод списка всех сотрудников
+        Employee employee1 = new Employee();
+        employee1.setFirst_name("John");
+        employee1.setLast_name("Doe");
+        employee1.setGender("Male");
+        employee1.setAge(30);
+        employee1.setCity(1);
+
+        employeeDAO.addEmployee(employee1);
+
+        Employee employee2 = new Employee();
+        employee2.setFirst_name("Jane");
+        employee2.setLast_name("Doe");
+        employee2.setGender("Female");
+        employee2.setAge(28);
+        employee2.setCity(2);
+
+        employeeDAO.addEmployee(employee2);
+
         List<Employee> employees = employeeDAO.getAllEmployees();
-        for (Employee emp : employees) {
-            System.out.println(emp);
-        }
+        System.out.println("All employees: " + employees);
 
-        final String user = "postgres";
-        final String password = "6565";
-        final String url = "jdbc:postgresql://localhost:5432/skypro";
+        Employee employeeToUpdate = employeeDAO.getEmployeeById(1);
+        employeeToUpdate.setAge(35);
+        employeeDAO.updateEmployee(employeeToUpdate);
 
-        try (Connection connection = DriverManager.getConnection(url, user, password)) {
-            // id работника, данные о котором мы хотим получить
-            int employeeId = 1;
-            String sql = "SELECT first_name, last_name, gender, city FROM employee WHERE id = ?";
-            PreparedStatement statement = connection.prepareStatement(sql);
-            statement.setInt(1, employeeId);
-            ResultSet resultSet = statement.executeQuery();
-            if (resultSet.next()) {
-                String firstName = resultSet.getString("first_name");
-                String lastName = resultSet.getString("last_name");
-                String gender = resultSet.getString("gender");
-                String city = resultSet.getString("city");
-                System.out.println("First name: " + firstName);
-                System.out.println("Last name: " + lastName);
-                System.out.println("Gender: " + gender);
-                System.out.println("City: " + city);
-            } else {
-                System.out.println("No employee found with id " + employeeId);
-            }
-        } catch (SQLException e) {
-            System.err.println("Error executing query: " + e.getMessage());
+        Employee employeeToDelete = employeeDAO.getEmployeeById(2);
+        employeeDAO.deleteEmployee(employeeToDelete);
 
-        }
+        employees = employeeDAO.getAllEmployees();
+        System.out.println("All employees after update and delete: " + employees);
+
+        context.close();
     }
 }
+
+

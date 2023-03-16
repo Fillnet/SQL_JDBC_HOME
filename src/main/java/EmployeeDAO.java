@@ -1,6 +1,7 @@
 import java.util.List;
 
 public interface EmployeeDAO {
+
     void addEmployee(Employee employee);
 
     Employee getEmployeeById(int id);
@@ -9,6 +10,6 @@ public interface EmployeeDAO {
 
     void updateEmployee(Employee employee);
 
-    void deleteEmployee(int id);
-
+    void deleteEmployee(Employee employee);
 }
+
