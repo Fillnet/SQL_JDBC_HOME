@@ -1,19 +1,26 @@
 import org.hibernate.SessionFactory;
-import org.hibernate.cfg.Configuration;
 import org.hibernate.boot.registry.StandardServiceRegistryBuilder;
-import org.hibernate.boot.registry.StandardServiceRegistry;
-import org.springframework.context.annotation.Bean;
+import org.hibernate.cfg.Configuration;
 
-@org.springframework.context.annotation.Configuration
+
 public class HibernateConfig {
+    private static SessionFactory sessionFactory;
 
-    @Bean
-    public SessionFactory sessionFactory() {
-        Configuration configuration = new Configuration().configure("hibernate.cfg.xml");
-        StandardServiceRegistry registry = new StandardServiceRegistryBuilder()
-                .applySettings(configuration.getProperties())
-                .build();
-        return configuration.buildSessionFactory(registry);
+    private HibernateConfig() {
+    }
+
+    public static SessionFactory getSessionFactory() {
+        if (sessionFactory == null) {
+            try {
+                Configuration configuration = new Configuration().configure();
+                configuration.addAnnotatedClass(Employee.class);
+                StandardServiceRegistryBuilder builder = new StandardServiceRegistryBuilder().applySettings(configuration.getProperties());
+                sessionFactory = configuration.buildSessionFactory(builder.build());
+
+            } catch (Exception e) {
+                System.out.println("Исключение!" + e);
+            }
+        }
+        return sessionFactory;
     }
 }
-

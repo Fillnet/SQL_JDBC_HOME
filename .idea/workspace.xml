@@ -4,16 +4,17 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="3e9ec53d-0d2b-46be-841e-59593c5226c5" name="Changes" comment="# Домашнее задание&#10;### Задание 2">
-      <change afterPath="$PROJECT_DIR$/src/main/java/DatabaseConfig.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/HibernateConfig.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/resources/hibernate.cfg.xml" afterDir="false" />
+    <list default="true" id="3e9ec53d-0d2b-46be-841e-59593c5226c5" name="Changes" comment="# Домашнее задание&#10;#Hibernate: введение">
+      <change afterPath="$PROJECT_DIR$/.idea/inspectionProfiles/Project_Default.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/dataSources.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/dataSources.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/pom.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/Application.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Application.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/DatabaseConfig.java" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/Employee.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Employee.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/EmployeeDAO.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/EmployeeDAO.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/EmployeeDAOImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/EmployeeDAOImpl.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/HibernateConfig.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/HibernateConfig.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/hibernate.cfg.xml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/hibernate.cfg.xml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -72,6 +73,7 @@
     "project.structure.proportion": "0.0",
     "project.structure.side.proportion": "0.0",
     "settings.editor.selected.configurable": "reference.settings.project.maven.repository.indices",
+    "spring.configuration.checksum": "fcb73930a4a47237a96d1ec865fc2ba9",
     "vue.rearranger.settings.migration": "true"
   },
   "keyToStringList": {
@@ -126,7 +128,8 @@
       <option name="presentableId" value="Default" />
       <updated>1678812120959</updated>
       <workItem from="1678812122101" duration="15637000" />
-      <workItem from="1678985923831" duration="12020000" />
+      <workItem from="1678985923831" duration="12902000" />
+      <workItem from="1679224541189" duration="2975000" />
     </task>
     <task id="LOCAL-00001" summary="1">
       <created>1678815057022</created>
@@ -156,7 +159,14 @@
       <option name="project" value="LOCAL" />
       <updated>1678827561575</updated>
     </task>
-    <option name="localTasksCounter" value="5" />
+    <task id="LOCAL-00005" summary="# Домашнее задание&#10;#Hibernate: введение">
+      <created>1678998157871</created>
+      <option name="number" value="00005" />
+      <option name="presentableId" value="LOCAL-00005" />
+      <option name="project" value="LOCAL" />
+      <updated>1678998157871</updated>
+    </task>
+    <option name="localTasksCounter" value="6" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -166,6 +176,7 @@
     <MESSAGE value="1" />
     <MESSAGE value="# Домашнее задание&#10;### Задание 1" />
     <MESSAGE value="# Домашнее задание&#10;### Задание 2" />
-    <option name="LAST_COMMIT_MESSAGE" value="# Домашнее задание&#10;### Задание 2" />
+    <MESSAGE value="# Домашнее задание&#10;#Hibernate: введение" />
+    <option name="LAST_COMMIT_MESSAGE" value="# Домашнее задание&#10;#Hibernate: введение" />
   </component>
 </project>

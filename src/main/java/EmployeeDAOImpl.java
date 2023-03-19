@@ -1,47 +1,51 @@
-import javax.persistence.EntityManager;
-import javax.persistence.PersistenceContext;
-import javax.persistence.criteria.CriteriaBuilder;
-import javax.persistence.criteria.CriteriaQuery;
-import javax.persistence.criteria.Root;
-
-import org.springframework.stereotype.Repository;
-import org.springframework.transaction.annotation.Transactional;
+import org.hibernate.Session;
+import org.hibernate.Transaction;
 
 import java.util.List;
 
-@Repository
-@Transactional
 public class EmployeeDAOImpl implements EmployeeDAO {
-
-    @PersistenceContext
-    public EntityManager entityManager;
 
     @Override
     public void addEmployee(Employee employee) {
-        entityManager.persist(employee);
+        try (Session session = HibernateConfig.getSessionFactory().openSession()) {
+            Transaction transaction = session.beginTransaction();
+
+            session.save(employee);
+            transaction.commit();
+        }
     }
 
     @Override
     public Employee getEmployeeById(int id) {
-        return entityManager.find(Employee.class, id);
+        try (Session session = HibernateConfig.getSessionFactory().openSession()) {
+            return session.get(Employee.class, id);
+        }
     }
 
     @Override
     public List<Employee> getAllEmployees() {
-        CriteriaBuilder cb = entityManager.getCriteriaBuilder();
-        CriteriaQuery<Employee> cq = cb.createQuery(Employee.class);
-        Root<Employee> root = cq.from(Employee.class);
-        cq.select(root);
-        return entityManager.createQuery(cq).getResultList();
+        List<Employee> employees = (List<Employee>) HibernateConfig
+                .getSessionFactory().openSession().createQuery("FROM Employee").list();
+        return employees;
     }
 
     @Override
     public void updateEmployee(Employee employee) {
-        entityManager.merge(employee);
+        try (Session session = HibernateConfig.getSessionFactory().openSession()) {
+            Transaction transaction = session.beginTransaction();
+
+            session.update(employee);
+            transaction.commit();
+        }
     }
 
     @Override
     public void deleteEmployee(Employee employee) {
-        entityManager.remove(entityManager.contains(employee) ? employee : entityManager.merge(employee));
+        try (Session session = HibernateConfig.getSessionFactory().openSession()) {
+            Transaction transaction = session.beginTransaction();
+
+            session.delete(employee);
+            transaction.commit();
+        }
     }
 }

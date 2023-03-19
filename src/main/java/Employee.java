@@ -16,12 +16,19 @@ public class Employee {
     String gender;
     @Column(name = "age")
     int age;
-    @Column(name = "city_id")
+    @Column(name = "city")
     private int city;
 
 
-    public Employee() {
+    public Employee(String first_name, String last_name, String gender, int age, int city) {
+        this.first_name = first_name;
+        this.last_name = last_name;
+        this.gender = gender;
+        this.age = age;
+        this.city = city;
+    }
 
+    public Employee() {
     }
 
     public int getId() {
@@ -88,7 +95,7 @@ public class Employee {
     @Override
     public String toString() {
         return
-                "id=" + id +
+                "\nid=" + id +
                         ", first_name='" + first_name + '\'' +
                         ", last_name='" + last_name + '\'' +
                         ", gender='" + gender + '\'' +
