@@ -1,6 +1,7 @@
 import javax.persistence.*;
 import java.util.Objects;
 
+
 @Entity
 @Table(name = "employee")
 public class Employee {
@@ -16,18 +17,22 @@ public class Employee {
     String gender;
     @Column(name = "age")
     int age;
+    @Column(name = "city_id")
+    private int cityId;
+    @ManyToOne
     @Column(name = "city")
-    private int city;
+    private City city;
 
 
-    public Employee(String first_name, String last_name, String gender, int age, int city) {
+
+    public Employee(String first_name, String last_name, String gender, int age,int cityId, City city) {
         this.first_name = first_name;
         this.last_name = last_name;
         this.gender = gender;
         this.age = age;
+        this.cityId = cityId;
         this.city = city;
     }
-
     public Employee() {
     }
 
@@ -71,13 +76,21 @@ public class Employee {
         this.age = age;
     }
 
-    public int getCity() {
-        return city;
+    public int getCityId() {
+        return cityId;
     }
 
-    public void setCity(int city) {
-        this.city = city;
+    public void setCityId(int cityId) {
+        this.cityId = cityId;
     }
+
+//    public City getCity() {
+//        return city;
+//    }
+//
+//    public void setCity(City city) {
+//        this.city = city;
+//    }
 
     @Override
     public boolean equals(Object o) {
@@ -99,7 +112,7 @@ public class Employee {
                         ", first_name='" + first_name + '\'' +
                         ", last_name='" + last_name + '\'' +
                         ", gender='" + gender + '\'' +
-                        ", age=" + age +
-                        ", city=" + city;
+                        ", age=" + age ;
+//                        ",+ city=" + city;
     }
 }
